@@ -4,6 +4,7 @@
  */
 
 import { useState, useMemo } from 'react';
+import { motion } from 'motion/react';
 import { 
   PERIODIC, 
   MATERIALS, 
@@ -78,22 +79,54 @@ export default function App() {
   };
 
   return (
-    <div className="max-w-[900px] mx-auto p-4 md:p-7">
-      <header className="flex items-center gap-3 mb-5">
-        <div className="flex items-center gap-3 bg-gradient-to-br from-[#0ea5a4] to-[#38bdf8] text-white p-2.5 rounded-xl shadow-sm">
-          <div className="w-10 h-10 rounded-lg bg-white/20 flex items-center justify-center font-extrabold text-xl">Z</div>
-          <div>
-            <h1 className="font-bold text-lg leading-tight">Z_eff Visual</h1>
-            <div className="text-[12px] opacity-90">Materials (expanded)</div>
-          </div>
+    <div className="min-h-screen bg-[#f8fafc]">
+      <header className="relative w-full overflow-hidden bg-[#0ea5a4] py-16 px-6">
+        <div className="absolute inset-0 bg-gradient-to-br from-[#0ea5a4] via-[#0d9488] to-[#38bdf8]"></div>
+        
+        {/* Decorative Watermark */}
+        <div className="absolute -right-20 -bottom-20 text-[300px] font-black text-white/5 select-none pointer-events-none">
+          Z
         </div>
+        
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+          className="max-w-[900px] mx-auto relative z-10"
+        >
+          <div className="flex items-center gap-4 mb-4">
+            <motion.div 
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 0.2, duration: 0.5 }}
+              className="w-12 h-12 rounded-2xl bg-white/20 backdrop-blur-md flex items-center justify-center border border-white/30 shadow-xl"
+            >
+              <span className="text-white font-black text-2xl">Z</span>
+            </motion.div>
+            <div className="h-px w-12 bg-white/30"></div>
+            <span className="text-white/60 uppercase tracking-[0.3em] text-[10px] font-bold">Forensic Analysis</span>
+          </div>
+          
+          <h1 className="text-5xl md:text-7xl font-black text-white tracking-tighter leading-none mb-4">
+            Z_eff <span className="text-white/40">Visual</span>
+          </h1>
+          
+          <p className="text-white/70 text-sm md:text-lg max-w-xl font-medium leading-relaxed">
+            Comprehensive visualization of effective atomic numbers for materials, compounds, and precursors.
+          </p>
+        </motion.div>
       </header>
 
-      <div className="space-y-5">
+      <div className="max-w-[900px] mx-auto p-4 md:p-7 -mt-10 relative z-20 pb-20">
         <main className="space-y-5">
-          <section className="bg-white rounded-xl p-5 shadow-sm border border-black/5">
-            <h2 className="text-lg font-bold mb-2">Select Material</h2>
-            <p className="text-gray-500 text-sm mb-6">
+          <motion.section 
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.6 }}
+            className="bg-white rounded-[2.5rem] p-8 md:p-12 shadow-[0_40px_80px_-20px_rgba(0,0,0,0.1)] border border-gray-50"
+          >
+            <h2 className="text-2xl font-black mb-2 tracking-tight">Select Material</h2>
+            <p className="text-gray-400 text-sm mb-8 font-medium">
               Choose a material from the list and press Calculate to see its Z_eff properties.
             </p>
 
@@ -192,7 +225,7 @@ export default function App() {
                 </p>
               </div>
             )}
-          </section>
+          </motion.section>
         </main>
       </div>
 
